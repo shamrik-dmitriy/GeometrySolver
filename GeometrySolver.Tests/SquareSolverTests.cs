@@ -48,7 +48,8 @@ namespace GeometrySolver.Tests
         [MemberData(nameof(ValidSquarePointsData))]
         public void TestPerimeters(IEnumerable<Point> points, double expected)
         {
-
+            var squareSolver = new SquareSolver(points);
+            squareSolver.GetPerimeter().Should().Be(expected);
         }
 
         public void TestAreas(IEnumerable<Point> points, double expected)
