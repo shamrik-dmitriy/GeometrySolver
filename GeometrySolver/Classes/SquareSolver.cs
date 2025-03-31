@@ -4,6 +4,7 @@ using System.Linq;
 using Geometry.Models;
 using Geometry.Utils;
 using GeometrySolver.Exceptions;
+using GeometrySolver.Extensions;
 using GeometrySolver.Interfaces;
 
 namespace GeometrySolver
@@ -25,25 +26,27 @@ namespace GeometrySolver
 
         public SquareSolver(IEnumerable<Point> points)
         {
-            Validate(points);
-
-            _points = points;
-        }
-
-        public override void Validate(IEnumerable<Point> points)
-        {
             if (!points.Any())
                 throw new ArgumentException("Количество точек должно быть больше 0");
 
             if (points.Count() != 4)
                 throw new InvalidOperationException("Квадрат должен иметь 4 точки");
 
+            points = points.SortToFormASquare();
+            
+            _points = points;
+
+            Validate();
+        }
+
+        public override void Validate()
+        {
             // Сортируем в порядке возрастания квадратов расстояний. 
             // Растояние между точками сторон для квадрата одинаково, а для диагоналей в два раза больше стороны,
             // следовательно первые 4 значения должны быть одинаковы, а последние два в два раза больше стороны. 
             var distances =
-                points.SelectMany((p1, index) =>
-                        points.Skip(index + 1).Select(p2 => GeometryUtils.GetDistanceSquared(p1, p2))).OrderBy(x => x)
+                _points.SelectMany((p1, index) =>
+                        _points.Skip(index + 1).Select(p2 => GeometryUtils.GetDistanceSquared(p1, p2))).OrderBy(x => x)
                     .ToArray();
 
             var isValid =

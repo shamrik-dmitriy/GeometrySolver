@@ -5,6 +5,6 @@ namespace GeometrySolver
 {
     public abstract class AFigure
     {
-        public abstract void Validate(IEnumerable<Point> points);
+        public abstract void Validate();
     }
 }
