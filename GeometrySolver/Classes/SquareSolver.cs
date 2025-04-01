@@ -33,7 +33,7 @@ namespace GeometrySolver
                 throw new InvalidOperationException("Квадрат должен иметь 4 точки");
 
             points = points.SortToFormASquare();
-            
+
             _points = points;
 
             Validate();
@@ -41,25 +41,34 @@ namespace GeometrySolver
 
         public override void Validate()
         {
-            // Сортируем в порядке возрастания квадратов расстояний. 
-            // Растояние между точками сторон для квадрата одинаково, а для диагоналей в два раза больше стороны,
-            // следовательно первые 4 значения должны быть одинаковы, а последние два в два раза больше стороны. 
-            var distances =
-                _points.SelectMany((p1, index) =>
-                        _points.Skip(index + 1).Select(p2 => GeometryUtils.GetDistanceSquared(p1, p2))).OrderBy(x => x)
-                    .ToArray();
+            var sideFirst = GeometryUtils.GetDistance(_points.ElementAt(0), _points.ElementAt(1));
+            var sideSecond = GeometryUtils.GetDistance(_points.ElementAt(1), _points.ElementAt(2));
+            var sideThird = GeometryUtils.GetDistance(_points.ElementAt(2), _points.ElementAt(3));
+            var sideFourth = GeometryUtils.GetDistance(_points.ElementAt(3), _points.ElementAt(0));
 
-            var isValid =
-                // Если в точках есть несколько одинаковых, то расстояние между точками будет 0
-                distances[0] > 0 &&
-                distances[0] == distances[1] &&
-                distances[1] == distances[2] &&
-                distances[2] == distances[3] &&
-                distances[4] == distances[5] &&
-                // Проверка диагонали
-                distances[4] == 2 * distances[0];
+            var diagonal1 = GeometryUtils.GetDistance(_points.ElementAt(0), _points.ElementAt(2));
+            var diagonal2 = GeometryUtils.GetDistance(_points.ElementAt(1), _points.ElementAt(3));
 
-            if (!isValid)
+            var isSquare = false;
+
+            if (sideFirst.CompareToPrecision(sideSecond))
+            {
+                if (sideSecond.CompareToPrecision(sideThird))
+                {
+                    if (sideThird.CompareToPrecision(sideFourth))
+                    {
+                        if (diagonal1.CompareToPrecision(diagonal2))
+                        {
+                            if (diagonal1.CompareToPrecision(Math.Sqrt(2) * sideFirst))
+                            {
+                                isSquare = true;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if (!isSquare)
                 throw new GeometryTypeException("Фигура не является квадратом");
         }
     }
