@@ -13,7 +13,7 @@ namespace Common.Extensions
         /// <returns>True - значения равны, False - значения не равны</returns>
         public static bool CompareToPrecision(this double a, double b, double precision = 1e-6)
         {
-            return Math.Abs(a - b) < precision;
+            return Math.Abs(a - b) <= precision;
         }
     }
 }
