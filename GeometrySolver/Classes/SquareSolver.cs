@@ -26,7 +26,7 @@ namespace GeometrySolver
 
         public SquareSolver(IEnumerable<Point> points) : base(points)
         {
-            base.Validate();
+            BaseParallelogramValidate();
 
             points = points.SortToFormASquare();
 
@@ -35,7 +35,7 @@ namespace GeometrySolver
             Validate();
         }
 
-        public override void Validate()
+        public void Validate()
         {
             var sideFirst = GeometryUtils.GetDistance(_points.ElementAt(0), _points.ElementAt(1));
             var sideSecond = GeometryUtils.GetDistance(_points.ElementAt(1), _points.ElementAt(2));

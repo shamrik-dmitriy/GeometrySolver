@@ -36,7 +36,7 @@ namespace GeometrySolver
         /// - проверяем что противополжные стороны равны 
         /// <exception cref="GeometryTypeException">Выбрасывает исключение, если точки не образуют прямоугольник</exception>
         /// </summary>
-        public override void Validate()
+        public void Validate()
         {
             base.Validate();
 

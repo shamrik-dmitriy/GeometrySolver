@@ -9,5 +9,7 @@ namespace GeometrySolver.Interfaces
         IEnumerable<Point> Points { get; }
         double GetArea();
         double GetPerimeter();
+        
+        void Validate();
     }
 }

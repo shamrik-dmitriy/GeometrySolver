@@ -6,7 +6,7 @@ using GeometrySolver.Interfaces;
 
 namespace GeometrySolver
 {
-    public abstract class ParallelogramSolver : AFigure, IFigure
+    public abstract class ParallelogramSolver : IFigure
     {
         public IEnumerable<Point> Points { get; }
 
@@ -22,13 +22,15 @@ namespace GeometrySolver
         /// </summary>
         /// <exception cref="ArgumentException">Выбрасывает исключение, если точек 0</exception>
         /// <exception cref="InvalidOperationException">Выбрасывает исключение, если точек не 4</exception>
-        public override void Validate()
+        public void Validate()
         {
-            if (!Points.Any())
-                throw new ArgumentException("Количество точек должно быть больше 0");
+            BaseParallelogramValidate();
+        }
 
-            if (Points.Count() != 4)
-                throw new InvalidOperationException("Параллелограмм должен иметь 4 точки");
+        protected void BaseParallelogramValidate()
+        {
+            if (!Points.Any() || Points.Count() != 4)
+                throw new ArgumentException("Параллелограмм должен иметь 4 точки");
         }
 
         public abstract double GetArea();
