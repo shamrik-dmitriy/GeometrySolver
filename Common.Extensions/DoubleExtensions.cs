@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GeometrySolver.Extensions
+namespace Common.Extensions
 {
     public static class DoubleExtensions
     {
