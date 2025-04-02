@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Common.Extensions;
 using Geometry.Models;
 using Geometry.Utils;
 using GeometrySolver.Exceptions;

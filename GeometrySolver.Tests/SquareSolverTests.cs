@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Common.Extensions;
 using FluentAssertions;
 using Geometry.Models;
+using Geometry.Utils;
 using GeometrySolver.Exceptions;
 using GeometrySolver.Extensions;
 using Xunit;
