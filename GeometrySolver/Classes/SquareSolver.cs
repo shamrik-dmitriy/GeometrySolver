@@ -16,12 +16,12 @@ namespace GeometrySolver
 
         public double GetArea()
         {
-            return Math.Pow(GeometryUtils.GetDistance(_points.First(), _points.Skip(1).First()), 2);
+            return Math.Pow(GeometryUtils.GetDistance(_points.ElementAt(0), _points.ElementAt(1)), 2);
         }
 
         public double GetPerimeter()
         {
-            return 4 * GeometryUtils.GetDistance(_points.First(), _points.Skip(1).First());
+            return 4 * GeometryUtils.GetDistance(_points.ElementAt(0), _points.ElementAt(1));
         }
 
         public SquareSolver(IEnumerable<Point> points)
