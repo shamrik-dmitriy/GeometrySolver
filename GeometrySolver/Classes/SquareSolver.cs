@@ -5,32 +5,27 @@ using Geometry.Models;
 using Geometry.Utils;
 using GeometrySolver.Exceptions;
 using GeometrySolver.Extensions;
-using GeometrySolver.Interfaces;
 
 namespace GeometrySolver
 {
-    public class SquareSolver : AFigure, IFigure
+    public class SquareSolver : RectangleSolver
     {
         private readonly IEnumerable<Point> _points;
         public IEnumerable<Point> Points { get; }
 
-        public double GetArea()
+        public override double GetArea()
         {
             return Math.Pow(GeometryUtils.GetDistance(_points.ElementAt(0), _points.ElementAt(1)), 2);
         }
 
-        public double GetPerimeter()
+        public override double GetPerimeter()
         {
             return 4 * GeometryUtils.GetDistance(_points.ElementAt(0), _points.ElementAt(1));
         }
 
-        public SquareSolver(IEnumerable<Point> points)
+        public SquareSolver(IEnumerable<Point> points) : base(points)
         {
-            if (!points.Any())
-                throw new ArgumentException("Количество точек должно быть больше 0");
-
-            if (points.Count() != 4)
-                throw new InvalidOperationException("Квадрат должен иметь 4 точки");
+            base.Validate();
 
             points = points.SortToFormASquare();
 
@@ -67,9 +62,14 @@ namespace GeometrySolver
                     }
                 }
             }
-            
+
             if (!isSquare)
                 throw new GeometryTypeException("Фигура не является квадратом");
+        }
+
+        public override string ToString()
+        {
+            return "Объект - квадрат";
         }
     }
 }

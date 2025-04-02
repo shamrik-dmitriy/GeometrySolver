@@ -13,17 +13,17 @@ namespace GeometrySolver.Tests
         #region Data
 
         public static TheoryData<IEnumerable<Point>, Type, string> InvalidSquarePointsData =>
-            new TheoryData<IEnumerable<Point>, Type, string>
+            new()
             {
                 { new List<Point>() { }, typeof(ArgumentException), "Количество точек должно быть больше 0" },
                 {
                     new List<Point>() { new Point(1, 1), new Point(1, 1) }, typeof(InvalidOperationException),
-                    "Квадрат должен иметь 4 точки"
+                    "Параллелограмм должен иметь 4 точки"
                 },
                 {
                     new List<Point>()
                         { new Point(1, 1), new Point(1, 1), new Point(1, 1), new Point(1, 1), new Point(1, 1) },
-                    typeof(InvalidOperationException), "Квадрат должен иметь 4 точки"
+                    typeof(InvalidOperationException), "Параллелограмм должен иметь 4 точки"
                 },
                 {
                     new List<Point>()
