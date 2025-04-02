@@ -64,7 +64,7 @@ namespace GeometrySolver
             }
 
             if (!isSquare)
-                throw new GeometryTypeException("Фигура не является квадратом");
+                throw new GeometryTypeException("Точки не образуют квадрат");
         }
 
         public override string ToString()

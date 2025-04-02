@@ -28,7 +28,7 @@ namespace GeometrySolver.Tests
                 {
                     new List<Point>()
                         { new Point(11.2, 0), new Point(-90.21, 21), new Point(0, 0), new Point(10.212, 123) },
-                    typeof(GeometryTypeException), "Фигура не является квадратом"
+                    typeof(GeometryTypeException), "Точки не образуют квадрат"
                 },
                 {
                     new List<Point>()
