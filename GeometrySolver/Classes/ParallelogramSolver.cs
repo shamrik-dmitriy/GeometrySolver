@@ -15,6 +15,13 @@ namespace GeometrySolver
             Points = points;
         }
 
+        /// <summary>
+        /// Выполняет базовую валидацию параллелограмма:
+        /// - имеет точки
+        /// - точек не больше и не меньше 4-х
+        /// </summary>
+        /// <exception cref="ArgumentException">Выбрасывает исключение, если точек 0</exception>
+        /// <exception cref="InvalidOperationException">Выбрасывает исключение, если точек не 4</exception>
         public override void Validate()
         {
             if (!Points.Any())
