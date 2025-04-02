@@ -17,9 +17,9 @@ namespace GeometrySolver.Tests
         public static TheoryData<IEnumerable<Point>, Type, string> InvalidSquarePointsData =>
             new()
             {
-                { new List<Point>() { }, typeof(ArgumentException), "Количество точек должно быть больше 0" },
+                { new List<Point>() { }, typeof(ArgumentException), "Параллелограмм должен иметь 4 точки" },
                 {
-                    new List<Point>() { new Point(1, 1), new Point(1, 1) }, typeof(InvalidOperationException),
+                    new List<Point>() { new Point(1, 1), new Point(1, 1) }, typeof(ArgumentException),
                     "Параллелограмм должен иметь 4 точки"
                 },
                 {
@@ -35,7 +35,7 @@ namespace GeometrySolver.Tests
                 {
                     new List<Point>()
                         { new(0.2, 0.4), new(4.3, 0.4), new(4.3, 2.7), new(0.2, 2.7) },
-                    typeof(GeometryTypeException), "Фигура не является квадратом"
+                    typeof(GeometryTypeException), "Точки не образуют квадрат"
                 }
             };
 
@@ -74,7 +74,7 @@ namespace GeometrySolver.Tests
             }
             else if (exceptionType == typeof(InvalidOperationException))
             {
-                act.Should().Throw<InvalidOperationException>().WithMessage(exceptionMessage);
+                act.Should().Throw<ArgumentException>().WithMessage(exceptionMessage);
             }
             else if (exceptionType == typeof(GeometryTypeException))
             {
